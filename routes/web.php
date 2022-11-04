@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// モクモク会一覧画面
+Route::get('/', [EventController::class, 'index'])->name('event.index');
 
-Route::get('/', function () {
-    return view('event.index');
-});
+// カテゴリー一覧画面
+Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index');
