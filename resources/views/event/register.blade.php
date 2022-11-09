@@ -10,14 +10,14 @@
       <input type="text" class="form-control" name="title" id="title">
     </div>
     {{-- カテゴリープルダウン --}}
-    <div class="form-group w-50">
-      <label for="category-id">{{ 'カテゴリー' }}<span class="badge badge-danger ml-2">{ '必須' }}</span></label>
-      <select class="form-control" id="category-id" name="category_id">
-        @foreach ($categories as $category)
-        <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
-        @endforeach
-      </select>
-    </div>
+      <div class="form-group w-50">
+        <label for="category-id">{{ 'カテゴリー' }}<span class="badge badge-danger ml-2">{{ '必須' }}</span></label>
+        <select class="form-control" id="category-id" name="category_id">
+          @foreach ($categories as $category)
+            <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+          @endforeach
+        </select>
+      </div>
     {{-- 開催日をカレンダーで選択 --}}
     <div class="form-group w-25">
       <label for="date">{{ '開催日' }}<span class="badge badge-danger ml-2">{ '必須' }}</span></label>
