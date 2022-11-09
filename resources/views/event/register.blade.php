@@ -13,8 +13,9 @@
     <div class="form-group w-50">
       <label for="category-id">{{ 'カテゴリー' }}<span class="badge badge-danger ml-2">{ '必須' }}</span></label>
       <select class="form-control" id="category-id" name="category_id">
-        <option value="1">Laravel</option>
-        <option value="2">Java</option>
+        @foreach ($categories as $category)
+        <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+        @endforeach
       </select>
     </div>
     {{-- 開催日をカレンダーで選択 --}}
@@ -43,13 +44,13 @@
       <input type="text" class="form-control" name="entry-fee" id="entry-fee">
     </div>
     {{-- もくもく会の詳細 --}}
-      <div class="form-group">
-        <label for="content">{{ '詳細' }}<span class="badge badge-danger ml-2">{{ '必須' }}</span></label>
-        <textarea class="form-control" name="content" id="content" rows="10" placeholder="もくもく会の詳細を記載してください。"></textarea>
-      </div>
-      <button type="submit" class="btn btn-success w-100">
-        {{ 'もくもく会を開催する' }}
-      </button>
+    <div class="form-group">
+      <label for="content">{{ '詳細' }}<span class="badge badge-danger ml-2">{{ '必須' }}</span></label>
+      <textarea class="form-control" name="content" id="content" rows="10" placeholder="もくもく会の詳細を記載してください。"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success w-100">
+      {{ 'もくもく会を開催する' }}
+    </button>
   </form>
 </div>
 @endsection
