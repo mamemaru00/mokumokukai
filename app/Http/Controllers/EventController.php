@@ -19,4 +19,12 @@ class EventController extends Controller
 
         return view('event.index', compact('events'));
     }
+
+    /**
+     * もくもく会登録画面
+     */
+    public function register()
+    {
+        return view('event.register');
+    }
 }
