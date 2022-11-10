@@ -48,9 +48,11 @@ class EventController extends Controller
             // 処理に失敗したらロールバック
             DB::rollback();
             // 例外を投げる
-            throw $e;
+            \Log::error($e);
+            // 登録処理失敗時にリダイレクト
+            return redirect()->route('event.index')->with('error', 'もくもく会の登録に失敗しました。');
         }
-        
-        return redirect()->route('event.index');
+
+        return redirect()->route('event.index')->with('error', 'もくもく会の登録に成功しました。');
     }
 }
