@@ -31,7 +31,29 @@ class EventController extends Controller
         // $id(event_id)をもとに、eventsテーブルの特定のレコードに絞り込む
         $event = $this->event->findEventByEventId($id);
 
-        return view('event.show', compact('event'));
+        // 指定の日付を△△/××に変換する
+        $date = date("m/d" ,strtotime($event->date));
+        //指定日の曜日を取得する
+        $getWeek = date('w', strtotime($event->date));
+        //配列を使用し、要素順に(日:0〜土:6)を設定する
+        $week = [
+            '日', //0
+            '月', //1
+            '火', //2
+            '水', //3
+            '木', //4
+            '金', //5
+            '土', //6
+        ];
+
+        return view('event.show', compact(
+            'event',
+            'date',
+            'getWeek',
+            'week',
+            'start_time',
+            'end_time',
+        ));
     }
 
     /**
