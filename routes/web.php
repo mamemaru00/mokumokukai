@@ -22,3 +22,6 @@ Route::get('/category/index', [CategoryController::class, 'index'])->name('categ
 
 // もくもく会登録画面
 Route::get('/event/register', [EventController::class, 'register'])->name('event.register');
+
+// もくもく会登録処理
+Route::post('/event/create', [EventController::class, 'create'])->name('event.create');
