@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
 
 class Event extends Model
 {
@@ -34,6 +34,7 @@ class Event extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
+
     /**
      * eventsテーブルのレコードを全件取得
      * 
@@ -43,6 +44,17 @@ class Event extends Model
     public function allEventsData()
     {
         return $this->get();
+    }
+
+    /**
+     * idをもとにeventsテーブルから特定のレコードに絞り込む
+     * 
+     * @param int $id イベントID
+     * @return Event
+     */
+    public function findEventByEventId($id)
+    {
+        return $this->find($id);
     }
 
     /**
@@ -63,13 +75,18 @@ class Event extends Model
     }
 
     /**
-     * idをもとにeventsテーブルから特定のレコードに絞り込む
-     * 
-     * @param int $id イベントID
-     * @return Event
+     * 更新処理
      */
-    public function findEventByEventId($id)
+    public function updatedEventData($request, $event)
     {
-        return $this->find($id);
+        return $event->fill([
+            'category_id' => $request->category_id,
+            'title'       => $request->title,
+            'date'        => $request->date,
+            'start_time'  => $request->start_time,
+            'end_time'    => $request->end_time,
+            'entry_fee'   => $request->entry_fee,
+            'content'     => $request->content,
+        ])->save();
     }
 }
