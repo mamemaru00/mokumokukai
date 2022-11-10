@@ -140,8 +140,21 @@ class EventController extends Controller
      */
     public function delete($id)
     {
-        // もくもく会のイベントを削除する
-        $isDelete = $this->event->deleteEventData($id);
+        try {
+            DB::beginTransaction();
+            // 更新対象のレコードの更新処理を実行
+            $isDelete = $this->event->deleteEventData($id);
+            
+            // 処理に成功したらコミット
+            DB::commit();
+        } catch (\Throwable $e) {
+            // 処理に失敗したらロールバック
+            DB::rollback();
+            // エラーログ
+            \Log::error($e);
+            // 登録処理失敗時にリダイレクト
+            return redirect()->route('event.index')->with('success', 'もくもく会の削除に失敗しました。');
+        }
         return redirect()->route('event.index')->with('success', 'もくもく会の削除に成功しました。');
     }
 }
