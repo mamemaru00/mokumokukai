@@ -46,6 +46,11 @@ class EventController extends Controller
             '土', //6
         ];
 
+        // 開始時間 ex.15:00:00→15:00に変換。秒部分を切り捨て
+        $start_time = substr($event->start_time, 0, -3);
+        // 終了時間 ex.19:00:00→19:00に変換。秒部分を切り捨て
+        $end_time = substr($event->end_time, 0, -3);
+
         return view('event.show', compact(
             'event',
             'date',
