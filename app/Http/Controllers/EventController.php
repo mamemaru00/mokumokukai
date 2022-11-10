@@ -134,4 +134,14 @@ class EventController extends Controller
         }
         return redirect()->route('event.index')->with('success', 'もくもく会の更新に成功しました。');
     }
+
+    /**
+     * 削除処理
+     */
+    public function delete($id)
+    {
+        // もくもく会のイベントを削除する
+        $isDelete = $this->event->deleteEventData($id);
+        return redirect()->route('event.index')->with('success', 'もくもく会の削除に成功しました。');
+    }
 }
